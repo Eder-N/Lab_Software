@@ -38,3 +38,5 @@
 
 .cloud-status{display:inline-flex;align-items:center;min-height:40px;border:1px solid var(--line);border-radius:999px;padding:0 12px;background:#eef7f1;color:var(--success);font-size:13px;font-weight:800;box-shadow:var(--soft-shadow)}
 @media(max-width:620px){.cloud-status{width:100%;justify-content:center}}
+
+.login-stack{width:min(920px,100%);display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start}.signup-card h2{font-size:20px;color:var(--primary);margin:0 0 4px}.signup-card{align-self:stretch}.signup-card small,.login-card small{line-height:1.45}@media(max-width:820px){.login-stack{grid-template-columns:1fr;max-width:440px}}

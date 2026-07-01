@@ -3,9 +3,14 @@ create extension if not exists pgcrypto;
 create table if not exists public.labs (
   id uuid primary key default gen_random_uuid(),
   name text not null default 'Lab_Software',
+  account_name text,
+  status text not null default 'active' check (status in ('active','blocked','cancelled')),
   owner_id uuid not null references auth.users(id) on delete cascade,
   created_at timestamptz not null default now()
 );
+
+alter table public.labs add column if not exists account_name text;
+alter table public.labs add column if not exists status text not null default 'active';
 
 create table if not exists public.lab_members (
   lab_id uuid not null references public.labs(id) on delete cascade,
@@ -36,9 +41,11 @@ as $$
   select exists (
     select 1
     from public.lab_members m
+    join public.labs l on l.id = m.lab_id
     where m.lab_id = check_lab_id
       and m.user_id = auth.uid()
       and m.status = 'active'
+      and l.status = 'active'
   );
 $$;
 
@@ -52,10 +59,12 @@ as $$
   select exists (
     select 1
     from public.lab_members m
+    join public.labs l on l.id = m.lab_id
     where m.lab_id = check_lab_id
       and m.user_id = auth.uid()
       and m.status = 'active'
       and m.role in ('owner','admin')
+      and l.status = 'active'
   );
 $$;
 
@@ -127,6 +136,8 @@ set search_path = public
 as $$
 declare
   existing_lab uuid;
+  lab_name text;
+  account_name text;
 begin
   if auth.uid() is null then
     raise exception 'Usuário não autenticado';
@@ -143,8 +154,11 @@ begin
     return existing_lab;
   end if;
 
-  insert into public.labs (name, owner_id)
-  values ('Lab_Software', auth.uid())
+  lab_name := coalesce(nullif(auth.jwt() -> 'user_metadata' ->> 'lab_name', ''), 'Lab_Software');
+  account_name := nullif(auth.jwt() -> 'user_metadata' ->> 'account_name', '');
+
+  insert into public.labs (name, account_name, owner_id)
+  values (lab_name, account_name, auth.uid())
   returning id into existing_lab;
 
   insert into public.lab_members (lab_id, user_id, role, status)
