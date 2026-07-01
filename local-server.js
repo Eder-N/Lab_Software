@@ -35,5 +35,5 @@ http.createServer((request, response) => {
     response.end(data);
   });
 }).listen(port, "127.0.0.1", () => {
-  console.log(`Lab_Software em http://127.0.0.1:${port}/`);
+  console.log(`LabNext em http://127.0.0.1:${port}/`);
 });
