@@ -236,3 +236,40 @@ end;
 $$;
 
 grant execute on function public.set_lab_subscription_status(uuid,text,text,date) to authenticated;
+
+create or replace function public.list_subscription_labs()
+returns table (
+  id uuid,
+  name text,
+  account_name text,
+  status text,
+  suspended_reason text,
+  suspended_until date,
+  created_at timestamptz,
+  updated_at timestamptz
+)
+language plpgsql
+security definer
+set search_path = public
+as $$
+begin
+  if coalesce(auth.jwt() ->> 'email', '') not in ('en.protese@gmail.com','eder.prolab@gmail.com') then
+    raise exception 'Acesso negado';
+  end if;
+
+  return query
+  select
+    l.id,
+    l.name,
+    l.account_name,
+    l.status,
+    l.suspended_reason,
+    l.suspended_until,
+    l.created_at,
+    l.updated_at
+  from public.labs l
+  order by l.created_at desc;
+end;
+$$;
+
+grant execute on function public.list_subscription_labs() to authenticated;
