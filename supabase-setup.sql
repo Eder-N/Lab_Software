@@ -31,6 +31,11 @@ alter table public.labs enable row level security;
 alter table public.lab_members enable row level security;
 alter table public.lab_state enable row level security;
 
+grant usage on schema public to authenticated;
+grant select, insert, update, delete on public.labs to authenticated;
+grant select, insert, update, delete on public.lab_members to authenticated;
+grant select, insert, update, delete on public.lab_state to authenticated;
+
 create or replace function public.is_lab_member(check_lab_id uuid)
 returns boolean
 language sql
@@ -167,3 +172,7 @@ begin
   return existing_lab;
 end;
 $$;
+
+grant execute on function public.is_lab_member(uuid) to authenticated;
+grant execute on function public.is_lab_admin(uuid) to authenticated;
+grant execute on function public.ensure_my_lab() to authenticated;
