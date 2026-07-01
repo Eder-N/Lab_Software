@@ -176,3 +176,63 @@ $$;
 grant execute on function public.is_lab_member(uuid) to authenticated;
 grant execute on function public.is_lab_admin(uuid) to authenticated;
 grant execute on function public.ensure_my_lab() to authenticated;
+
+-- Controle de assinatura: use status = 'active' para liberar e
+-- 'suspended', 'blocked' ou 'cancelled' para bloquear o acesso do cliente.
+alter table public.labs add column if not exists suspended_reason text;
+alter table public.labs add column if not exists suspended_until date;
+alter table public.labs add column if not exists updated_at timestamptz not null default now();
+
+do $$
+begin
+  alter table public.labs drop constraint if exists labs_status_check;
+  alter table public.labs
+    add constraint labs_status_check
+    check (status in ('active','suspended','blocked','cancelled'));
+end $$;
+
+drop policy if exists "labs_select_members" on public.labs;
+create policy "labs_select_members"
+on public.labs
+for select
+to authenticated
+using (
+  exists (
+    select 1
+    from public.lab_members m
+    where m.lab_id = labs.id
+      and m.user_id = auth.uid()
+      and m.status = 'active'
+  )
+);
+
+create or replace function public.set_lab_subscription_status(
+  target_lab uuid,
+  new_status text,
+  reason text default null,
+  until_date date default null
+)
+returns void
+language plpgsql
+security definer
+set search_path = public
+as $$
+begin
+  if coalesce(auth.jwt() ->> 'email', '') not in ('en.protese@gmail.com','eder.prolab@gmail.com') then
+    raise exception 'Acesso negado';
+  end if;
+
+  if new_status not in ('active','suspended','blocked','cancelled') then
+    raise exception 'Status invalido';
+  end if;
+
+  update public.labs
+  set status = new_status,
+      suspended_reason = case when new_status = 'active' then null else reason end,
+      suspended_until = case when new_status = 'active' then null else until_date end,
+      updated_at = now()
+  where id = target_lab;
+end;
+$$;
+
+grant execute on function public.set_lab_subscription_status(uuid,text,text,date) to authenticated;
