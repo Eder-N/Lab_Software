@@ -65,10 +65,14 @@
 #login-screen .login-card input:focus{border-color:#0d4b7b;box-shadow:0 0 0 4px rgba(13,75,123,.13)}
 #login-screen .login-card button{width:100%;min-height:42px;border-radius:4px;background:#0d4270;box-shadow:0 4px 8px rgba(13,66,112,.24);text-transform:uppercase;font-size:12px;letter-spacing:0}
 #login-screen .login-card button:hover{background:#092f51}
+#login-screen .login-card .signup-toggle,#login-screen .login-card .signup-cancel{background:transparent;color:#0d4270;border:1px solid #cbd5e1;box-shadow:none;text-transform:none;font-size:13px}
+#login-screen .login-card .signup-toggle:hover,#login-screen .login-card .signup-cancel:hover{background:#eef6fd}
 #login-screen .login-card small{color:#64748b;font-size:13px}
 #login-screen .login-error{min-height:16px;font-size:13px}
 #login-screen .remember-login{display:flex;color:#475569;font-weight:700}
 #login-screen .remember-login input{height:18px}
 #login-screen .signup-card{margin-top:4px;padding-top:18px;border-top:1px solid #e2e8f0}
+#login-screen .signup-card[hidden]{display:none}
+#login-screen .login-card-muted{padding-bottom:14px;border-bottom:1px solid #e2e8f0}
 @media(max-width:900px){#login-screen.login-screen{padding:16px}#login-screen .login-stack{grid-template-columns:1fr;min-height:0}#login-screen .login-showcase{padding:34px 24px}#login-screen .login-showcase strong{font-size:34px}#login-screen .login-panel{padding:32px 24px}#login-screen .login-card h1{font-size:44px}}
 @media(max-width:560px){#login-screen .login-showcase{display:none}#login-screen .login-panel{padding:26px 18px}#login-screen .login-card h1{font-size:38px}}
