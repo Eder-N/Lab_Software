@@ -65,8 +65,8 @@
 #login-screen .login-card input:focus{border-color:#0d4b7b;box-shadow:0 0 0 4px rgba(13,75,123,.13)}
 #login-screen .login-card button{width:100%;min-height:42px;border-radius:4px;background:#0d4270;box-shadow:0 4px 8px rgba(13,66,112,.24);text-transform:uppercase;font-size:12px;letter-spacing:0}
 #login-screen .login-card button:hover{background:#092f51}
-#login-screen .login-card .signup-toggle,#login-screen .login-card .signup-cancel{background:transparent;color:#0d4270;border:1px solid #cbd5e1;box-shadow:none;text-transform:none;font-size:13px}
-#login-screen .login-card .signup-toggle:hover,#login-screen .login-card .signup-cancel:hover{background:#eef6fd}
+#login-screen .login-card .signup-toggle,#login-screen .login-card .signup-cancel,#login-screen .login-card .signup-resend{background:transparent;color:#0d4270;border:1px solid #cbd5e1;box-shadow:none;text-transform:none;font-size:13px}
+#login-screen .login-card .signup-toggle:hover,#login-screen .login-card .signup-cancel:hover,#login-screen .login-card .signup-resend:hover{background:#eef6fd}
 #login-screen .login-card small{color:#64748b;font-size:13px}
 #login-screen .login-error{min-height:16px;font-size:13px}
 #login-screen .remember-login{display:flex;color:#475569;font-weight:700}
