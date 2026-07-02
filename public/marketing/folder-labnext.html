@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Folder LabNext</title>
+  <style>
+    :root{
+      --navy:#07172b;
+      --navy-2:#0d2745;
+      --gold:#c8a44d;
+      --gold-2:#f0d98a;
+      --paper:#fffaf0;
+      --ink:#0b1628;
+      --muted:#64748b;
+      --line:#e3d3a9;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:#dfe7ef;font-family:Arial,Helvetica,sans-serif;color:var(--ink)}
+    .sheet{width:210mm;min-height:297mm;margin:18px auto;background:#fff;box-shadow:0 18px 60px rgba(7,23,43,.22);overflow:hidden}
+    .hero{min-height:114mm;background:linear-gradient(135deg,var(--navy),var(--navy-2));color:#fff;padding:22mm 18mm 16mm;position:relative}
+    .hero:after{content:"";position:absolute;right:-42mm;top:-35mm;width:110mm;height:110mm;border-radius:50%;border:1px solid rgba(240,217,138,.35)}
+    .brand{display:flex;align-items:center;gap:14px;position:relative;z-index:1}
+    .mark{width:58px;height:58px;border:2px solid var(--gold);display:grid;place-items:center;background:rgba(200,164,77,.13)}
+    .mark strong{font-size:25px;letter-spacing:1px;color:var(--gold-2)}
+    .brand h1{margin:0;font-size:44px;letter-spacing:0;font-weight:800}
+    .brand small{display:block;color:var(--gold-2);font-weight:700;margin-top:2px}
+    .hero h2{font-size:38px;line-height:1.08;margin:24mm 0 8mm;max-width:150mm}
+    .hero p{font-size:18px;line-height:1.55;max-width:142mm;color:#e8eef7;margin:0}
+    .cta-row{display:flex;gap:10px;align-items:center;margin-top:15mm;flex-wrap:wrap}
+    .cta{background:var(--gold);color:#07172b;border-radius:8px;padding:12px 18px;font-size:17px;font-weight:800}
+    .tag{border:1px solid rgba(240,217,138,.6);border-radius:8px;padding:11px 14px;color:#fff;font-weight:700}
+    .content{padding:14mm 18mm 16mm;display:grid;gap:12mm}
+    .intro{display:grid;grid-template-columns:1.1fr .9fr;gap:12mm;align-items:start}
+    .panel{border:1px solid var(--line);border-radius:8px;background:var(--paper);padding:9mm}
+    .panel h3,.section h3{margin:0 0 6mm;color:var(--navy);font-size:22px}
+    .panel p{margin:0;color:#334155;line-height:1.5;font-size:14.5px}
+    .features{display:grid;grid-template-columns:repeat(2,1fr);gap:6mm}
+    .feature{border-left:4px solid var(--gold);padding:2mm 0 2mm 5mm}
+    .feature strong{display:block;font-size:15px;color:var(--navy);margin-bottom:2mm}
+    .feature span{display:block;color:#475569;font-size:13.5px;line-height:1.4}
+    .section{display:grid;gap:6mm}
+    .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:5mm}
+    .step{border:1px solid #e7edf3;border-radius:8px;padding:6mm;min-height:42mm}
+    .step b{display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:var(--navy);color:var(--gold-2);margin-bottom:5mm}
+    .step strong{display:block;color:var(--navy);font-size:15px;margin-bottom:2mm}
+    .step span{font-size:13.5px;color:#526174;line-height:1.4}
+    .bottom{display:grid;grid-template-columns:1fr .8fr;gap:8mm;align-items:stretch}
+    .offer{background:var(--navy);color:#fff;border-radius:8px;padding:8mm}
+    .offer h3{margin:0 0 4mm;color:var(--gold-2);font-size:24px}
+    .offer p{margin:0 0 6mm;color:#dce7f5;line-height:1.45}
+    .offer ul{margin:0;padding-left:18px;color:#fff;line-height:1.75;font-size:14px}
+    .contact{border:2px solid var(--gold);border-radius:8px;padding:8mm;display:grid;align-content:center;gap:4mm;text-align:center}
+    .contact strong{font-size:20px;color:var(--navy)}
+    .whatsapp{font-size:24px;font-weight:900;color:var(--navy)}
+    .contact span{font-size:13px;color:var(--muted);line-height:1.4}
+    footer{border-top:1px solid #e5e7eb;padding-top:6mm;display:flex;justify-content:space-between;gap:10mm;color:#64748b;font-size:12.5px}
+    @media(max-width:900px){
+      .sheet{width:100%;min-height:auto;margin:0}
+      .hero,.content{padding:28px}
+      .hero h2{font-size:32px;margin-top:44px}
+      .intro,.bottom{grid-template-columns:1fr}
+      .features,.steps{grid-template-columns:1fr}
+      footer{display:grid}
+    }
+    @media print{
+      body{background:#fff}
+      .sheet{margin:0;box-shadow:none;width:210mm;min-height:297mm}
+      @page{size:A4;margin:0}
+    }
+  </style>
+</head>
+<body>
+  <main class="sheet">
+    <section class="hero">
+      <div class="brand">
+        <div class="mark"><strong>LN</strong></div>
+        <div>
+          <h1>LabNext</h1>
+          <small>Sistema para laboratórios de prótese dentária</small>
+        </div>
+      </div>
+      <h2>Venda mais organização, controle e agilidade para o seu laboratório.</h2>
+      <p>Uma plataforma online para controlar clientes, entradas, serviços, tabela de preços, produção, cobranças e financeiro em um só lugar.</p>
+      <div class="cta-row">
+        <div class="cta">Assinatura mensal para laboratórios</div>
+        <div class="tag">Acesso online</div>
+        <div class="tag">Controle por laboratório</div>
+      </div>
+    </section>
+
+    <section class="content">
+      <div class="intro">
+        <div class="panel">
+          <h3>Controle completo do laboratório</h3>
+          <p>O LabNext foi criado para laboratórios que querem sair da bagunça de cadernos, planilhas soltas e anotações perdidas. Tudo fica organizado por cliente, paciente, serviço, setor, etapa de produção e financeiro.</p>
+        </div>
+        <div class="panel">
+          <h3>Ideal para vender como mensalidade</h3>
+          <p>O cliente acessa pela internet com login próprio, cadastra os dados do laboratório e usa o sistema no dia a dia para acompanhar pedidos, cobranças e relatórios.</p>
+        </div>
+      </div>
+
+      <div class="section">
+        <h3>Principais recursos</h3>
+        <div class="features">
+          <div class="feature"><strong>Entradas e notas</strong><span>Cadastro de pedidos com cliente, paciente, serviços, quantidade, valores, cor, dentes e nota para impressão.</span></div>
+          <div class="feature"><strong>Produção em Kanban</strong><span>Controle visual das etapas: recebido, produção, acabamento, conferência e finalizado.</span></div>
+          <div class="feature"><strong>Tabela de preços</strong><span>Serviços com valores e setor para agilizar o lançamento das entradas.</span></div>
+          <div class="feature"><strong>Financeiro completo</strong><span>Livro caixa, entradas, saídas, recibos, pagamentos de clientes, cheques e relatórios.</span></div>
+          <div class="feature"><strong>Cobrança mensal</strong><span>Extrato individual por cliente com notas do período, impressão e opção de gerar PDF.</span></div>
+          <div class="feature"><strong>Relatórios estratégicos</strong><span>Serviços mais lançados, clientes que mais gastam, faturamento e despesas por período.</span></div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h3>Como funciona</h3>
+        <div class="steps">
+          <div class="step"><b>1</b><strong>Contrate a assinatura</strong><span>O laboratório recebe acesso online com login e senha próprios.</span></div>
+          <div class="step"><b>2</b><strong>Cadastre seus dados</strong><span>Clientes, serviços, setores, preços, equipe e informações da empresa.</span></div>
+          <div class="step"><b>3</b><strong>Use no dia a dia</strong><span>Registre entradas, acompanhe produção, emita notas e gere cobranças mensais.</span></div>
+        </div>
+      </div>
+
+      <div class="bottom">
+        <div class="offer">
+          <h3>Demonstração disponível</h3>
+          <p>Mostre para o cliente como o sistema ajuda a ganhar tempo, reduzir erros e profissionalizar a gestão do laboratório.</p>
+          <ul>
+            <li>Sem instalação no computador</li>
+            <li>Atualizações online</li>
+            <li>Dados separados por laboratório</li>
+            <li>Suporte para implantação</li>
+          </ul>
+        </div>
+        <div class="contact">
+          <strong>Chame no WhatsApp</strong>
+          <div class="whatsapp">(18) 99747-6202</div>
+          <span>Solicite uma demonstração do LabNext e conheça os planos de assinatura mensal.</span>
+        </div>
+      </div>
+
+      <footer>
+        <span>LabNext - Sistema online para gestão de laboratórios de prótese dentária</span>
+        <span>Folder comercial para divulgação</span>
+      </footer>
+    </section>
+  </main>
+</body>
+</html>
