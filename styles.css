@@ -97,3 +97,42 @@
 @media print{.modern-document .document-header,.billing-statement-header .document-header{box-shadow:none;-webkit-print-color-adjust:exact;print-color-adjust:exact}.labnext-logo-symbol b,.financial-table th{ -webkit-print-color-adjust:exact;print-color-adjust:exact}}
 
 .entry-items-box{border:1px solid var(--line);border-radius:12px;background:#fffaf0;padding:12px;display:grid;gap:10px;grid-column:1/-1}.entry-items-title{display:flex;justify-content:space-between;align-items:center;gap:10px}.entry-items-title strong{color:var(--primary);font-size:14px}.entry-items-head,.entry-item-row{display:grid;grid-template-columns:minmax(180px,1.4fr) 72px 96px 96px 80px 100px auto;gap:8px;align-items:center}.entry-items-head{color:var(--muted);font-size:12px;font-weight:800;padding:0 2px}.entry-items-list{display:grid;gap:8px}.entry-item-row input{min-width:0}.entry-item-row button{min-height:38px}@media(max-width:900px){.entry-items-head{display:none}.entry-item-row{grid-template-columns:1fr 1fr}.entry-item-row button{grid-column:1/-1}.entry-items-title{align-items:stretch;flex-direction:column}}
+
+/* Impressao da nota em meia folha A4 */
+@media print{
+  @page{size:A4 portrait;margin:6mm}
+  body:has(.note-modal:not([hidden])) .note-modal{padding:0!important;background:#fff!important}
+  body:has(.note-modal:not([hidden])) .note-dialog{width:198mm!important;max-width:198mm!important;margin:0 auto!important;box-shadow:none!important;border-radius:0!important;overflow:visible!important}
+  body:has(.note-modal:not([hidden])) .note-content{padding:0!important}
+  body:has(.note-modal:not([hidden])) .note-paper.os-note,
+  body:has(.note-modal:not([hidden])) .note-paper.improved-note{
+    width:198mm!important;
+    height:136mm!important;
+    min-height:136mm!important;
+    max-height:136mm!important;
+    margin:0 auto!important;
+    padding:5mm!important;
+    overflow:hidden!important;
+    border:0!important;
+    box-shadow:none!important;
+    page-break-after:avoid!important;
+    break-after:avoid!important;
+    font-size:10.5px!important;
+  }
+  body:has(.note-modal:not([hidden])) .document-header{margin-bottom:6px!important;padding:8px 10px!important}
+  body:has(.note-modal:not([hidden])) .labnext-logo{width:86px!important;min-height:78px!important}
+  body:has(.note-modal:not([hidden])) .labnext-logo-symbol{width:58px!important;height:58px!important;border-radius:14px!important}
+  body:has(.note-modal:not([hidden])) .labnext-logo-symbol b{inset:9px!important;font-size:21px!important}
+  body:has(.note-modal:not([hidden])) .document-company strong{font-size:14px!important}
+  body:has(.note-modal:not([hidden])) .document-company span,
+  body:has(.note-modal:not([hidden])) .document-meta span{font-size:10px!important}
+  body:has(.note-modal:not([hidden])) .os-client-box p,
+  body:has(.note-modal:not([hidden])) .os-tech p,
+  body:has(.note-modal:not([hidden])) .os-payment p{font-size:10.5px!important;margin:1px 0!important}
+  body:has(.note-modal:not([hidden])) .os-table th,
+  body:has(.note-modal:not([hidden])) .os-table td{font-size:10px!important;padding:1.5px 3px!important;line-height:1.08!important}
+  body:has(.note-modal:not([hidden])) .os-body{padding-top:5px!important;gap:10px!important}
+  body:has(.note-modal:not([hidden])) .os-subtotal{padding:3px 2px!important}
+  body:has(.note-modal:not([hidden])) .os-total-card{font-size:13px!important;padding:6px 8px!important}
+  body:has(.note-modal:not([hidden])) .os-signature{margin-top:8px!important}
+}
