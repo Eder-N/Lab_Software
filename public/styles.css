@@ -395,3 +395,84 @@
     box-shadow:none!important;
   }
 }
+
+/* Previa limpa do extrato do livro caixa */
+.financial-preview-toolbar{display:none}
+body.previewing-financial-extract{
+  background:#fff!important;
+}
+body.previewing-financial-extract .financial-preview-toolbar{
+  position:fixed;
+  top:12px;
+  right:12px;
+  z-index:100;
+  display:flex;
+  gap:8px;
+  padding:8px;
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:#fff;
+  box-shadow:var(--shadow);
+}
+body.previewing-financial-extract .app-shell,
+body.previewing-financial-extract .main,
+body.previewing-financial-extract #finance-view,
+body.previewing-financial-extract #finance-view>.workbench,
+body.previewing-financial-extract #finance-view>.workbench>.panel,
+body.previewing-financial-extract .financial-extract-box,
+body.previewing-financial-extract #financial-extract-header,
+body.previewing-financial-extract #financial-extract-summary,
+body.previewing-financial-extract .financial-extract-box .table-wrap{
+  display:block!important;
+}
+body.previewing-financial-extract .app-shell{grid-template-columns:1fr!important}
+body.previewing-financial-extract .main{max-width:none!important;padding:24px!important}
+body.previewing-financial-extract #finance-view>.workbench>.panel{
+  border:0!important;
+  box-shadow:none!important;
+  padding:0!important;
+  background:#fff!important;
+}
+body.previewing-financial-extract .financial-extract-box{
+  width:190mm;
+  max-width:calc(100vw - 48px);
+  border:0!important;
+  box-shadow:none!important;
+  background:#fff!important;
+}
+body.previewing-financial-extract .sidebar,
+body.previewing-financial-extract .topbar,
+body.previewing-financial-extract .finance-forms,
+body.previewing-financial-extract .finance-summary,
+body.previewing-financial-extract .cashbook-box,
+body.previewing-financial-extract .checks-box,
+body.previewing-financial-extract .financial-analysis-box,
+body.previewing-financial-extract .finance-list-heading,
+body.previewing-financial-extract table[data-table="transactions"],
+body.previewing-financial-extract .financial-extract-box>.cashbook-title,
+body.previewing-financial-extract .financial-extract-box .extract-filters,
+body.previewing-financial-extract .view:not(#finance-view){
+  display:none!important;
+}
+
+@media print{
+  .financial-preview-toolbar{display:none!important}
+  body.printing-financial-extract #clients-view,
+  body.printing-financial-extract #clients-view *,
+  body.printing-financial-extract #dashboard-view,
+  body.printing-financial-extract #services-view,
+  body.printing-financial-extract #prices-view,
+  body.printing-financial-extract #suppliers-view,
+  body.printing-financial-extract #staff-view,
+  body.printing-financial-extract #partners-view,
+  body.printing-financial-extract #reports-view,
+  body.printing-financial-extract #users-view,
+  body.printing-financial-extract #company-view,
+  body.printing-financial-extract #support-view,
+  body.printing-financial-extract #subscriptions-view,
+  body.printing-financial-extract #finance-view>.workbench>.panel>*:not(.financial-extract-box),
+  body.printing-financial-extract .panel-heading,
+  body.printing-financial-extract .search{
+    display:none!important;
+  }
+}
