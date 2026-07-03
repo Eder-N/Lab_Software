@@ -347,3 +347,51 @@
     padding:6px 7px;
   }
 }
+
+/* Impressao limpa: somente extrato do livro caixa */
+@media print{
+  @page{size:A4 portrait;margin:8mm}
+  body.printing-financial-extract .app-shell,
+  body.printing-financial-extract .main,
+  body.printing-financial-extract #finance-view,
+  body.printing-financial-extract #finance-view>.workbench,
+  body.printing-financial-extract #finance-view>.workbench>.panel,
+  body.printing-financial-extract .financial-extract-box,
+  body.printing-financial-extract #financial-extract-header,
+  body.printing-financial-extract #financial-extract-summary,
+  body.printing-financial-extract .financial-extract-box .table-wrap{
+    display:block!important;
+  }
+  body.printing-financial-extract .sidebar,
+  body.printing-financial-extract .topbar,
+  body.printing-financial-extract .finance-forms,
+  body.printing-financial-extract .finance-summary,
+  body.printing-financial-extract .cashbook-box,
+  body.printing-financial-extract .checks-box,
+  body.printing-financial-extract .financial-analysis-box,
+  body.printing-financial-extract .finance-list-heading,
+  body.printing-financial-extract table[data-table="transactions"],
+  body.printing-financial-extract .financial-extract-box>.cashbook-title,
+  body.printing-financial-extract .financial-extract-box .extract-filters,
+  body.printing-financial-extract #print-financial-extract{
+    display:none!important;
+  }
+  body.printing-financial-extract .view{display:none!important}
+  body.printing-financial-extract #finance-view{display:block!important}
+  body.printing-financial-extract #finance-view>.workbench>.panel{
+    border:0!important;
+    box-shadow:none!important;
+    padding:0!important;
+    background:#fff!important;
+  }
+  body.printing-financial-extract .financial-extract-box{
+    width:190mm!important;
+    max-width:190mm!important;
+    border:0!important;
+    box-shadow:none!important;
+    background:#fff!important;
+  }
+  body.printing-financial-extract .financial-extract-box .document-header{
+    box-shadow:none!important;
+  }
+}
