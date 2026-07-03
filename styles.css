@@ -90,11 +90,11 @@
 .labnext-logo small{color:#fff;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
 .document-company{display:grid;gap:4px;color:#fff}.document-company strong{font-size:22px;color:#fff}.document-company span{font-size:12px;color:#e6edf6;font-weight:700}
 .document-meta{justify-self:end;display:grid;gap:5px;text-align:right;color:#07172b}.document-meta strong{font-size:22px;color:#07172b}.document-meta span{display:block;color:#34465c;font-weight:800;font-size:12px}
-.billing-statement-header .document-header{margin:0 0 14px;box-shadow:none}.receipt-paper .document-header{margin-bottom:26px}.os-note .document-header{margin-bottom:10px}
+.billing-statement-header .document-header{margin:0 0 14px}.receipt-paper .document-header{margin-bottom:26px}.os-note .document-header{margin-bottom:10px}
 .nav-badge{display:inline-grid;place-items:center;min-width:22px;height:22px;margin-left:6px;padding:0 6px;border-radius:999px;background:#d8b55b;color:#07172b;font-size:12px;font-weight:900}
 .new-login-alert{display:grid;gap:4px;margin:12px 0;padding:14px 16px;border:1px solid #d8b55b;border-radius:14px;background:#fff8df;color:#07172b;box-shadow:var(--soft-shadow)}.new-login-alert[hidden]{display:none!important}.new-login-alert strong{font-size:16px}.new-login-alert span{font-weight:800;color:#6b5a25}
 @media(max-width:760px){.modern-document .document-header,.billing-statement-header .document-header{grid-template-columns:1fr;gap:12px;text-align:left}.document-logo-wrap{justify-content:flex-start}.document-meta{justify-self:start;text-align:left}}
-@media print{.modern-document .document-header,.billing-statement-header .document-header{box-shadow:none;-webkit-print-color-adjust:exact;print-color-adjust:exact}.labnext-logo-symbol b,.financial-table th{ -webkit-print-color-adjust:exact;print-color-adjust:exact}}
+@media print{.modern-document .document-header,.billing-statement-header .document-header{-webkit-print-color-adjust:exact;print-color-adjust:exact}.labnext-logo-symbol b,.financial-table th{ -webkit-print-color-adjust:exact;print-color-adjust:exact}}
 
 .entry-items-box{border:1px solid var(--line);border-radius:12px;background:#fffaf0;padding:12px;display:grid;gap:10px;grid-column:1/-1;max-width:100%;overflow:hidden}.entry-items-title{display:flex;justify-content:space-between;align-items:center;gap:10px}.entry-items-title strong{color:var(--primary);font-size:14px}.entry-items-head{display:none}.entry-items-list{display:grid;gap:10px}.entry-item-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;align-items:center;border:1px solid #eadcae;border-radius:10px;background:#fff;padding:10px}.entry-item-row input{min-width:0}.entry-item-row input[name="itemService"],.entry-item-row input[name="itemOdontogram"],.entry-item-row button{grid-column:1/-1}.entry-item-row button{min-height:38px}.entry-items-title .ghost-button{white-space:normal}@media(min-width:1200px){.entry-item-row{grid-template-columns:1fr 72px 92px}.entry-item-row input[name="itemService"]{grid-column:1/-1}.entry-item-row input[name="itemOdontogram"],.entry-item-row button{grid-column:auto}}@media(max-width:900px){.entry-item-row{grid-template-columns:1fr 1fr}.entry-item-row button{grid-column:1/-1}.entry-items-title{align-items:stretch;flex-direction:column}}
 
@@ -119,13 +119,6 @@
     break-after:avoid!important;
     font-size:10.5px!important;
   }
-  body:has(.note-modal:not([hidden])) .document-header{margin-bottom:6px!important;padding:8px 10px!important}
-  body:has(.note-modal:not([hidden])) .labnext-logo{width:86px!important;min-height:78px!important}
-  body:has(.note-modal:not([hidden])) .labnext-logo-symbol{width:58px!important;height:58px!important;border-radius:14px!important}
-  body:has(.note-modal:not([hidden])) .labnext-logo-symbol b{inset:9px!important;font-size:21px!important}
-  body:has(.note-modal:not([hidden])) .document-company strong{font-size:14px!important}
-  body:has(.note-modal:not([hidden])) .document-company span,
-  body:has(.note-modal:not([hidden])) .document-meta span{font-size:10px!important}
   body:has(.note-modal:not([hidden])) .os-client-box p,
   body:has(.note-modal:not([hidden])) .os-tech p,
   body:has(.note-modal:not([hidden])) .os-payment p{font-size:10.5px!important;margin:1px 0!important}
@@ -135,4 +128,70 @@
   body:has(.note-modal:not([hidden])) .os-subtotal{padding:3px 2px!important}
   body:has(.note-modal:not([hidden])) .os-total-card{font-size:13px!important;padding:6px 8px!important}
   body:has(.note-modal:not([hidden])) .os-signature{margin-top:8px!important}
+}
+
+/* Mantem a nota e os relatorios com o mesmo cabecalho na tela e na impressao */
+.note-paper.os-note{
+  width:198mm;
+  height:136mm;
+  max-width:100%;
+  margin:0 auto;
+  padding:5mm;
+  overflow:hidden;
+}
+.modern-document .document-header,
+.billing-statement-header .document-header{
+  display:grid!important;
+  grid-template-columns:150px 1fr 220px!important;
+  gap:22px!important;
+  align-items:center!important;
+  margin-bottom:18px!important;
+  padding:16px 18px!important;
+  border:1px solid #d8c07a!important;
+  border-radius:12px!important;
+  background:linear-gradient(135deg,#07172b 0,#0e2a4d 62%,#f8f3df 62%,#fff 100%)!important;
+  color:#07172b!important;
+  box-shadow:0 12px 28px rgba(7,23,43,.10)!important;
+  -webkit-print-color-adjust:exact;
+  print-color-adjust:exact;
+}
+.os-note .document-header{margin-bottom:10px!important}
+.document-logo-wrap{display:flex!important;align-items:center!important;justify-content:center!important}
+.labnext-logo{width:118px!important;min-height:112px!important;display:grid!important;place-items:center!important;gap:8px!important;color:#f8e7a7!important}
+.labnext-logo-symbol{position:relative!important;width:82px!important;height:82px!important;border:2px solid #d8b55b!important;border-radius:22px!important;background:linear-gradient(145deg,#061427,#102e55)!important;box-shadow:inset 0 0 0 8px rgba(216,181,91,.08),0 10px 24px rgba(0,0,0,.18)!important}
+.labnext-logo-symbol b{position:absolute!important;inset:13px 11px!important;display:grid!important;place-items:center!important;border-radius:16px!important;background:#d8b55b!important;color:#07172b!important;font-size:30px!important;line-height:1!important;letter-spacing:0!important;font-weight:900!important}
+.labnext-logo small{color:#fff!important;font-weight:900!important;letter-spacing:.08em!important;text-transform:uppercase!important}
+.document-company{display:grid!important;gap:4px!important;color:#fff!important}
+.document-company strong{font-size:22px!important;color:#fff!important}
+.document-company span{font-size:12px!important;color:#e6edf6!important;font-weight:700!important}
+.document-meta{justify-self:end!important;display:grid!important;gap:5px!important;text-align:right!important;color:#07172b!important}
+.document-meta strong{font-size:22px!important;color:#07172b!important}
+.document-meta span{display:block!important;color:#34465c!important;font-weight:800!important;font-size:12px!important}
+
+@media print{
+  body:has(.note-modal:not([hidden])) .note-paper.os-note{
+    width:198mm!important;
+    height:136mm!important;
+    max-width:198mm!important;
+    margin:0 auto!important;
+    padding:5mm!important;
+  }
+  body.printing-billing .client-statement .document-header,
+  body.printing-single-statement .client-statement .document-header,
+  body:has(.note-modal:not([hidden])) .note-paper.os-note .document-header{
+    display:grid!important;
+    grid-template-columns:150px 1fr 220px!important;
+    gap:22px!important;
+    align-items:center!important;
+    margin-bottom:18px!important;
+    padding:16px 18px!important;
+    border:1px solid #d8c07a!important;
+    border-radius:12px!important;
+    background:linear-gradient(135deg,#07172b 0,#0e2a4d 62%,#f8f3df 62%,#fff 100%)!important;
+    color:#07172b!important;
+    box-shadow:0 12px 28px rgba(7,23,43,.10)!important;
+    -webkit-print-color-adjust:exact!important;
+    print-color-adjust:exact!important;
+  }
+  body:has(.note-modal:not([hidden])) .note-paper.os-note .document-header{margin-bottom:10px!important}
 }
