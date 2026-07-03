@@ -214,3 +214,28 @@
   }
 }
 .financial-table small{display:block;margin-top:2px;color:#555;font-size:11px;line-height:1.25}
+
+/* Extrato do livro caixa em formato de conferencia */
+.financial-extract-table{min-width:0}
+.financial-extract-table th:nth-child(3),
+.financial-extract-table td:nth-child(3),
+.financial-extract-table th:nth-child(4),
+.financial-extract-table td:nth-child(4),
+.financial-extract-table th:nth-child(5),
+.financial-extract-table td:nth-child(5){text-align:right}
+.financial-extract-table td:nth-child(2) strong,
+.financial-extract-table td:nth-child(2) small{display:block}
+.financial-extract-table td:nth-child(2) small{margin-top:3px;color:var(--muted);font-size:11px;font-weight:700}
+@media print{
+  body.printing-financial-extract .financial-extract-box{
+    max-width:277mm;
+    margin:0 auto;
+  }
+  body.printing-financial-extract .financial-extract-table{
+    font-size:13px;
+  }
+  body.printing-financial-extract .financial-extract-table th,
+  body.printing-financial-extract .financial-extract-table td{
+    padding:7px 8px;
+  }
+}
