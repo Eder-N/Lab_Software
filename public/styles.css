@@ -476,3 +476,14 @@ body.previewing-financial-extract .view:not(#finance-view){
     display:none!important;
   }
 }
+
+/* Cores das linhas do Livro Caixa */
+.cashbook-table tr.cashbook-row-in td{background:#ecfdf3!important;border-bottom-color:#bbf0cf!important}
+.cashbook-table tr.cashbook-row-out td{background:#fff1f1!important;border-bottom-color:#f2c6c6!important}
+.cashbook-table tr.cashbook-row-pending td{background:#fff6df!important;border-bottom-color:#f0d28a!important}
+.cashbook-table tr.cashbook-row-in td:first-child{box-shadow:inset 4px 0 0 #17845b}
+.cashbook-table tr.cashbook-row-out td:first-child{box-shadow:inset 4px 0 0 #c43d3d}
+.cashbook-table tr.cashbook-row-pending td:first-child{box-shadow:inset 4px 0 0 #d68a00}
+.cashbook-table tr.cashbook-row-in:hover td{background:#e1faeb!important}
+.cashbook-table tr.cashbook-row-out:hover td{background:#ffe7e7!important}
+.cashbook-table tr.cashbook-row-pending:hover td{background:#ffefc2!important}
