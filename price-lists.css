@@ -1,0 +1,27 @@
+.price-list-manager {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: end;
+  margin-bottom: 18px;
+  padding: 16px;
+  border: 1px solid #e1e8f2;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.price-list-manager > div {
+  display: grid;
+  gap: 6px;
+  min-width: 240px;
+}
+
+.price-list-manager span,
+.editor label small {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.price-list-manager select { min-height: 42px; }
+.editor label small { display: block; margin-top: 5px; line-height: 1.35; }
