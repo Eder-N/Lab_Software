@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "build": "echo Static site ready",
+    "build": "node sync-public.js && echo Static site ready",
+    "sync-public": "node sync-public.js",
+    "check": "node --check app.js && node --check price-lists.js && node --check proof-flow.js && node --check finance-enhancements.js && node --check sync-public.js && node --check public/app.js && node --check public/price-lists.js && node --check public/proof-flow.js && node --check public/finance-enhancements.js",
     "start": "npx serve ."
   }
 }

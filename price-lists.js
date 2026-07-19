@@ -14,10 +14,13 @@ function buildPriceListInterface() {
 
   const priceView = document.querySelector("#prices-view");
   if (priceView && !document.querySelector("#active-price-list")) {
-    priceView.insertAdjacentHTML("afterbegin", '<div class="price-list-manager"><div><span>Tabela selecionada</span><select id="active-price-list"></select></div><button type="button" id="new-price-list">Nova tabela</button><button type="button" class="ghost-button" id="duplicate-price-list">Duplicar</button><button type="button" class="ghost-button" id="rename-price-list">Renomear</button><button type="button" class="danger" id="delete-price-list">Excluir</button></div>');
+    priceView.insertAdjacentHTML("afterbegin", '<div class="price-list-manager"><div><span>Tabela selecionada</span><select id="active-price-list"></select></div><button type="button" id="new-price-list">Nova tabela</button><button type="button" class="ghost-button" id="duplicate-price-list">Duplicar</button><button type="button" class="ghost-button" id="copy-price-services">Copiar serviços</button><button type="button" class="ghost-button" id="adjust-price-list">Reajustar %</button><button type="button" class="ghost-button" id="rename-price-list">Renomear</button><button type="button" class="danger" id="delete-price-list">Excluir</button></div>');
   }
   if (priceView && !document.querySelector("#price-category-manager")) {
     priceView.insertAdjacentHTML("afterbegin", '<section class="price-category-manager" id="price-category-manager"><div class="price-category-heading"><div><strong>Setores cadastrados</strong><span>Setores da tabela de preços selecionada</span></div><button type="button" class="ghost-button" id="new-price-category">Cadastrar setor</button></div><div class="price-category-list" id="price-category-list"></div></section>');
+  }
+  if (priceView && !document.querySelector("#price-list-clients")) {
+    priceView.insertAdjacentHTML("afterbegin", '<section class="price-list-clients" id="price-list-clients"></section>');
   }
 }
 
@@ -76,6 +79,7 @@ function refreshPriceListControls() {
   if (priceForm?.elements.priceListId) priceForm.elements.priceListId.value = activePriceListId;
   const heading = document.querySelector("#prices-view .panel-heading h2");
   if (heading) heading.textContent = `Tabela de preços - ${priceListName(activePriceListId)}`;
+  renderPriceListClients();
   renderPriceCategoryList();
 }
 
@@ -104,6 +108,8 @@ function bindPriceListManager() {
     refreshVisiblePrices();
   });
   document.querySelector("#new-price-category")?.addEventListener("click", addPriceCategory);
+  document.querySelector("#adjust-price-list")?.addEventListener("click", adjustActivePriceList);
+  document.querySelector("#copy-price-services")?.addEventListener("click", copyActivePriceListServices);
   document.querySelector("#new-price-list")?.addEventListener("click", () => {
     const name = prompt("Nome da nova tabela de preços");
     if (!name?.trim()) return;
@@ -155,6 +161,57 @@ function bindPriceListManager() {
     const category = event.currentTarget.elements.category?.value?.trim();
     if (category) savePriceCategory(category);
   }, true);
+}
+
+function priceListClientNames(id = activePriceListId) {
+  return (state.clients || []).filter(client => (client.priceListId || state.priceLists?.[0]?.id) === id).map(client => client.name).filter(Boolean).sort((a, b) => a.localeCompare(b, "pt-BR"));
+}
+
+function renderPriceListClients() {
+  const box = document.querySelector("#price-list-clients");
+  if (!box) return;
+  const names = priceListClientNames();
+  box.innerHTML = `<div><strong>Clientes usando esta tabela</strong><span>${names.length ? names.map(esc).join(", ") : "Nenhum cliente vinculado"}</span></div>`;
+}
+
+function adjustActivePriceList() {
+  const rows = pricesForList(activePriceListId);
+  if (!rows.length) return alert("Esta tabela não possui serviços para reajustar.");
+  const input = prompt("Informe o percentual de reajuste. Exemplo: 10 para aumentar 10% ou -5 para reduzir 5%.");
+  if (input === null) return;
+  const percent = Number(String(input).replace(",", "."));
+  if (!Number.isFinite(percent)) return alert("Informe um percentual válido.");
+  if (!confirm(`Aplicar reajuste de ${percent}% em ${rows.length} serviço(s) da tabela "${priceListName(activePriceListId)}"?`)) return;
+  rows.forEach(price => {
+    const value = Number(price.salePrice) || 0;
+    price.salePrice = (value * (1 + percent / 100)).toFixed(2);
+  });
+  saveState();
+  refreshVisiblePrices();
+}
+
+function copyActivePriceListServices() {
+  const rows = pricesForList(activePriceListId);
+  if (!rows.length) return alert("Esta tabela não possui serviços para copiar.");
+  const targets = (state.priceLists || []).filter(list => list.id !== activePriceListId);
+  if (!targets.length) return alert("Crie outra tabela antes de copiar os serviços.");
+  const options = targets.map((list, index) => `${index + 1} - ${list.name}`).join("\n");
+  const choice = prompt(`Escolha a tabela de destino:\n${options}`);
+  if (choice === null) return;
+  const index = Number(choice) - 1;
+  const target = targets[index];
+  if (!target) return alert("Tabela de destino inválida.");
+  const existing = pricesForList(target.id).map(price => normalizeName(price.name || serviceName(price.serviceId)));
+  const copied = rows.filter(price => !existing.includes(normalizeName(price.name || serviceName(price.serviceId))));
+  copied.forEach(price => state.prices.push({ ...price, id: uid(), priceListId: target.id }));
+  target.categories = priceCategoriesForList(target.id);
+  priceCategoriesForList(activePriceListId).forEach(category => {
+    if (!target.categories.some(item => normalizeName(item) === normalizeName(category))) target.categories.push(category);
+  });
+  target.categories.sort((a, b) => a.localeCompare(b, "pt-BR"));
+  saveState();
+  refreshVisiblePrices();
+  alert(`${copied.length} serviço(s) copiado(s) para ${target.name}.`);
 }
 
 function savePriceCategory(name) {
