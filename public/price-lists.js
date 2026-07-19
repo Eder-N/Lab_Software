@@ -16,11 +16,15 @@ function buildPriceListInterface() {
   if (priceView && !document.querySelector("#active-price-list")) {
     priceView.insertAdjacentHTML("afterbegin", '<div class="price-list-manager"><div><span>Tabela selecionada</span><select id="active-price-list"></select></div><button type="button" id="new-price-list">Nova tabela</button><button type="button" class="ghost-button" id="duplicate-price-list">Duplicar</button><button type="button" class="ghost-button" id="rename-price-list">Renomear</button><button type="button" class="danger" id="delete-price-list">Excluir</button></div>');
   }
+  if (priceView && !document.querySelector("#price-category-manager")) {
+    priceView.insertAdjacentHTML("afterbegin", '<section class="price-category-manager" id="price-category-manager"><div class="price-category-heading"><div><strong>Setores cadastrados</strong><span>Setores da tabela de preços selecionada</span></div><button type="button" class="ghost-button" id="new-price-category">Cadastrar setor</button></div><div class="price-category-list" id="price-category-list"></div></section>');
+  }
 }
 
 function ensurePriceLists() {
   state.priceLists = Array.isArray(state.priceLists) ? state.priceLists : [];
   if (!state.priceLists.length) state.priceLists.push({ id: uid(), name: "Tabela Padrão" });
+  state.priceLists.forEach(list => { list.categories = Array.isArray(list.categories) ? list.categories : []; });
   const fallback = state.priceLists[0].id;
   (state.prices || []).forEach(price => { if (!price.priceListId) price.priceListId = fallback; });
   (state.clients || []).forEach(client => { if (!client.priceListId) client.priceListId = fallback; });
@@ -44,6 +48,17 @@ function pricesForList(id) {
   return (state.prices || []).filter(price => (price.priceListId || state.priceLists[0].id) === id);
 }
 
+function activePriceList() {
+  return state.priceLists?.find(list => list.id === activePriceListId) || state.priceLists?.[0];
+}
+
+function priceCategoriesForList(id = activePriceListId) {
+  const list = state.priceLists?.find(item => item.id === id) || state.priceLists?.[0];
+  const saved = Array.isArray(list?.categories) ? list.categories : [];
+  const used = pricesForList(id).map(item => item.category).filter(Boolean);
+  return [...new Set([...saved, ...used].filter(Boolean))].sort((a, b) => a.localeCompare(b, "pt-BR"));
+}
+
 function refreshPriceListControls() {
   ensurePriceLists();
   const options = state.priceLists.map(list => `<option value="${esc(list.id)}">${esc(list.name)}</option>`).join("");
@@ -61,6 +76,7 @@ function refreshPriceListControls() {
   if (priceForm?.elements.priceListId) priceForm.elements.priceListId.value = activePriceListId;
   const heading = document.querySelector("#prices-view .panel-heading h2");
   if (heading) heading.textContent = `Tabela de preços - ${priceListName(activePriceListId)}`;
+  renderPriceCategoryList();
 }
 
 function refreshVisiblePrices() {
@@ -70,10 +86,24 @@ function refreshVisiblePrices() {
 }
 
 function bindPriceListManager() {
+  document.addEventListener("click", event => {
+    const button = event.target.closest('[data-add-category="prices"]');
+    if (!button) return;
+    event.preventDefault();
+    event.stopPropagation();
+    addPriceCategory();
+  }, true);
+  document.addEventListener("click", event => {
+    const edit = event.target.closest("[data-edit-price-category]");
+    const remove = event.target.closest("[data-delete-price-category]");
+    if (edit) editPriceCategory(edit.dataset.editPriceCategory);
+    if (remove) deletePriceCategory(remove.dataset.deletePriceCategory);
+  });
   document.querySelector("#active-price-list")?.addEventListener("change", event => {
     activePriceListId = event.target.value;
     refreshVisiblePrices();
   });
+  document.querySelector("#new-price-category")?.addEventListener("click", addPriceCategory);
   document.querySelector("#new-price-list")?.addEventListener("click", () => {
     const name = prompt("Nome da nova tabela de preços");
     if (!name?.trim()) return;
@@ -122,7 +152,71 @@ function bindPriceListManager() {
   });
   document.querySelector('[data-form="prices"]')?.addEventListener("submit", event => {
     if (event.currentTarget.elements.priceListId) event.currentTarget.elements.priceListId.value = activePriceListId;
+    const category = event.currentTarget.elements.category?.value?.trim();
+    if (category) savePriceCategory(category);
   }, true);
+}
+
+function savePriceCategory(name) {
+  const list = activePriceList();
+  if (!list) return;
+  list.categories = Array.isArray(list.categories) ? list.categories : [];
+  if (!list.categories.some(category => normalizeName(category) === normalizeName(name))) {
+    list.categories.push(name);
+    list.categories.sort((a, b) => a.localeCompare(b, "pt-BR"));
+  }
+}
+
+function addPriceCategory() {
+  ensurePriceLists();
+  const name = prompt("Nome do setor");
+  const category = String(name || "").trim();
+  if (!category) return;
+  savePriceCategory(category);
+  const field = document.querySelector('[data-form="prices"] [name="category"]');
+  if (field) field.value = category;
+  saveState();
+  refreshVisiblePrices();
+}
+
+function editPriceCategory(oldName) {
+  const list = activePriceList();
+  if (!list) return;
+  const name = prompt("Novo nome do setor", oldName);
+  const category = String(name || "").trim();
+  if (!category || normalizeName(category) === normalizeName(oldName)) return;
+  if (priceCategoriesForList().some(item => normalizeName(item) === normalizeName(category))) return alert("Já existe um setor com esse nome.");
+  list.categories = priceCategoriesForList().map(item => normalizeName(item) === normalizeName(oldName) ? category : item);
+  pricesForList(activePriceListId).forEach(price => {
+    if (normalizeName(price.category) === normalizeName(oldName)) price.category = category;
+  });
+  const field = document.querySelector('[data-form="prices"] [name="category"]');
+  if (field && normalizeName(field.value) === normalizeName(oldName)) field.value = category;
+  saveState();
+  refreshVisiblePrices();
+}
+
+function deletePriceCategory(name) {
+  const list = activePriceList();
+  if (!list) return;
+  const used = pricesForList(activePriceListId).filter(price => normalizeName(price.category) === normalizeName(name)).length;
+  const message = used ? `Este setor está em ${used} serviço(s). Deseja remover o setor desses serviços?` : `Excluir o setor "${name}"?`;
+  if (!confirm(message)) return;
+  list.categories = priceCategoriesForList().filter(item => normalizeName(item) !== normalizeName(name));
+  pricesForList(activePriceListId).forEach(price => {
+    if (normalizeName(price.category) === normalizeName(name)) price.category = "";
+  });
+  const field = document.querySelector('[data-form="prices"] [name="category"]');
+  if (field && normalizeName(field.value) === normalizeName(name)) field.value = "";
+  saveState();
+  refreshVisiblePrices();
+}
+
+function renderPriceCategoryList() {
+  const box = document.querySelector("#price-category-list");
+  if (!box) return;
+  const categories = priceCategoriesForList();
+  box.innerHTML = categories.length ? categories.map(category => `<article class="price-category-item"><strong>${esc(category)}</strong><div><button type="button" class="ghost-button" data-edit-price-category="${esc(category)}">Editar</button><button type="button" class="danger" data-delete-price-category="${esc(category)}">Excluir</button></div></article>`).join("") : '<div class="price-category-empty">Nenhum setor cadastrado nesta tabela.</div>';
 }
 
 const baseFilteredRows = filteredRows;
@@ -148,7 +242,7 @@ populateServiceCatalogOptions = function() {
   const services = [...new Set(pricesForList(listId).map(item => item.name || serviceName(item.serviceId)).filter(Boolean))].sort((a, b) => a.localeCompare(b, "pt-BR"));
   if (serviceList) serviceList.innerHTML = services.map(name => `<option value="${esc(name)}"></option>`).join("");
   if (priceCategoryList) {
-    const categories = [...new Set(pricesForList(activePriceListId).map(item => item.category).filter(Boolean))].sort((a, b) => a.localeCompare(b, "pt-BR"));
+    const categories = priceCategoriesForList(activePriceListId);
     priceCategoryList.innerHTML = categories.map(name => `<option value="${esc(name)}"></option>`).join("");
   }
 };
