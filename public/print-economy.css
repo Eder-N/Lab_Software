@@ -1,4 +1,40 @@
 /* Impressão econômica: notas e extratos sem fundos coloridos. */
+.modern-document .document-header,
+.billing-statement-header .document-header {
+  background: #fff !important;
+  background-image: none !important;
+  color: #111 !important;
+  border-color: #777 !important;
+  box-shadow: none !important;
+}
+
+.labnext-logo,
+.labnext-logo small,
+.document-company,
+.document-company strong,
+.document-company span,
+.document-meta,
+.document-meta strong,
+.document-meta span {
+  color: #111 !important;
+  text-shadow: none !important;
+}
+
+.labnext-logo-symbol,
+.labnext-logo-symbol b {
+  background: #fff !important;
+  background-image: none !important;
+  color: #111 !important;
+  border-color: #111 !important;
+  box-shadow: none !important;
+}
+
+.labnext-logo-symbol i {
+  border-color: #111 !important;
+  border-top-color: transparent !important;
+  border-right-color: transparent !important;
+}
+
 @media print {
   .modern-document,
   .modern-document .document-header,
