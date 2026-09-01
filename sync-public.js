@@ -13,6 +13,11 @@ const files = [
   "proof-flow.css",
   "proof-flow.js",
   "finance-enhancements.js",
+  "payment-discounts.js",
+  "dashboard-modern.js",
+  "dashboard-modern.css",
+  "print-economy.css",
+  "print-black-white.css",
 ];
 
 fs.mkdirSync(publicDir, { recursive: true });
