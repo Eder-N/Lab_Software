@@ -1,5 +1,7 @@
 (function () {
-  const PAYMENT_METHODS = ["Dinheiro", "Pix", "Cartão", "Boleto", "Cheque", "Transferência"];
+  const FALLBACK_PAYMENT_METHODS = ["Dinheiro", "Pix", "Cartão", "Boleto", "Cheque", "Transferência"];
+  const currentPaymentMethods = () =>
+    typeof companyPaymentMethods === "function" ? companyPaymentMethods() : FALLBACK_PAYMENT_METHODS;
 
   function insertPaymentMethodField(form) {
     if (!form || form.elements.paymentMethod) return;
@@ -8,8 +10,8 @@
     if (!anchor) return;
     const label = document.createElement("label");
     label.innerHTML = `Forma de pagamento<select name="paymentMethod">
-      <option value="">Não informado</option>
-      ${PAYMENT_METHODS.map(method => `<option value="${method}">${method}</option>`).join("")}
+      <option value="">Selecione</option>
+      ${currentPaymentMethods().map(method => `<option value="${method}">${method}</option>`).join("")}
     </select>`;
     anchor.insertAdjacentElement("afterend", label);
   }
@@ -23,30 +25,6 @@
     }
     schemas.transactions.format = schemas.transactions.format || {};
     schemas.transactions.format.paymentMethod = value => value ? esc(value) : "-";
-  }
-
-  function patchClientPaymentSubmit() {
-    const form = document.querySelector("#client-payment-form");
-    if (!form || form.dataset.paymentMethodPatch) return;
-    form.dataset.paymentMethodPatch = "true";
-    form.addEventListener("submit", () => {
-      const data = Object.fromEntries(new FormData(form).entries());
-      const paymentMethod = data.paymentMethod || "";
-      setTimeout(() => {
-        const target = data.id
-          ? (state.transactions || []).find(item => item.id === data.id)
-          : [...(state.transactions || [])].reverse().find(item =>
-              item.clientName === data.clientName &&
-              item.date === (data.date || today) &&
-              parseAmountValue(item.amount) === parseAmountValue(data.amount)
-            );
-        if (!target) return;
-        target.paymentMethod = paymentMethod;
-        saveState();
-        renderClientPayments();
-        renderTables();
-      }, 0);
-    });
   }
 
   function patchClientPaymentEditor() {
@@ -77,7 +55,6 @@
     insertPaymentMethodField(document.querySelector('[data-form="transactions"]'));
     insertPaymentMethodField(document.querySelector("#client-payment-form"));
     installTransactionSchemaColumn();
-    patchClientPaymentSubmit();
     patchClientPaymentEditor();
     installClientPaymentRenderer();
     renderClientPayments();

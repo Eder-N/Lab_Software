@@ -5,7 +5,7 @@
   "scripts": {
     "build": "node sync-public.js && echo Static site ready",
     "sync-public": "node sync-public.js",
-    "check": "node --check app.js && node --check price-lists.js && node --check proof-flow.js && node --check finance-enhancements.js && node --check sync-public.js && node --check public/app.js && node --check public/price-lists.js && node --check public/proof-flow.js && node --check public/finance-enhancements.js",
+    "check": "node --check app.js && node --check price-lists.js && node --check proof-flow.js && node --check finance-enhancements.js && node --check payment-discounts.js && node --check dashboard-modern.js && node --check sync-public.js && node --check public/app.js && node --check public/price-lists.js && node --check public/proof-flow.js && node --check public/finance-enhancements.js && node --check public/payment-discounts.js && node --check public/dashboard-modern.js",
     "start": "npx serve ."
   }
 }
