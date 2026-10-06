@@ -13,7 +13,7 @@
 .company-side,.finance-side{display:grid;gap:18px;align-content:start;min-width:0}
 .billing-quick-ranges{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:-4px 0 14px}.billing-quick-ranges>span{color:var(--muted);font-size:12px;font-weight:700}.billing-quick-ranges button{min-height:30px;padding:0 11px;font-size:12.5px}
 .extract-filters{display:flex;flex-wrap:wrap;gap:10px;align-items:end}.extract-filters label{flex:1 1 150px;min-width:0}.extract-filters button{flex:0 0 auto}.payment-methods-panel{margin-top:0}.payment-method-form{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:end;margin-bottom:14px}.payment-method-form button{height:42px;white-space:nowrap}.payment-methods-list{display:flex;flex-wrap:wrap;gap:8px}.payment-method-chip{display:inline-flex;align-items:center;gap:8px;min-height:34px;padding:0 6px 0 12px;border:1px solid var(--line);border-radius:999px;background:var(--accent-soft);color:var(--ink);font-size:13px;font-weight:700}.payment-method-remove{display:grid;place-items:center;width:22px;height:22px;min-height:22px;padding:0;border:0;border-radius:999px;background:transparent;color:var(--muted);font-size:17px;line-height:1}.payment-method-remove:hover{background:#fbe9e7;color:var(--danger)}.competence-hint{display:block;margin-top:2px;color:var(--muted);font-size:12px;line-height:1.35}.competence-hint-open{color:var(--danger);font-weight:700}@media(max-width:720px){.payment-method-form{grid-template-columns:1fr}}
-.reports-panel{max-width:1180px}.aging-panel{margin-bottom:16px}#aging-summary{grid-template-columns:repeat(5,minmax(120px,1fr))}.aging-table th:nth-child(n+2),.aging-table td:nth-child(n+2){text-align:right}.aging-table th:last-child,.aging-table td:last-child{text-align:center}tr.aging-row-warning{background:#fff8ec}tr.aging-row-critical{background:#fdecec}.aging-no-phone{color:var(--muted);font-size:12px}a.ghost-button{display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink);text-decoration:none;font-weight:700}
+.reports-panel{max-width:1180px}.aging-no-phone{color:var(--muted);font-size:12px}a.ghost-button{display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink);text-decoration:none;font-weight:700}
 .whatsapp-button,a.whatsapp-button{display:inline-flex;align-items:center;gap:6px;border:1px solid #bfe3c9;border-radius:8px;background:#fff;color:#1f8a5f;min-height:32px;padding:0 12px;font-size:12.5px;text-decoration:none;font-weight:700;white-space:nowrap}.whatsapp-button:hover,a.whatsapp-button:hover{background:#eafaef;border-color:#8fd0a6}.billing-alert-summary{display:flex;gap:24px;margin-bottom:14px}.billing-alert-summary div{border:1px solid var(--line);border-radius:10px;background:#fffaf0;padding:12px 16px;flex:1}.billing-alert-summary span{display:block;color:var(--muted);font-size:11.5px;font-weight:700;text-transform:uppercase}.billing-alert-summary strong{display:block;margin-top:6px;font-size:20px}.billing-alert-list{display:grid;gap:10px}.billing-alert-item{display:grid;grid-template-columns:1fr auto auto;gap:14px;align-items:center;border:1px solid var(--line);border-radius:10px;padding:12px 14px;background:#fff}.billing-alert-item strong{display:block}.billing-alert-item span{display:block;margin-top:2px;color:var(--muted);font-size:12px}.receipt-paper{width:min(190mm,100%);margin:auto;border:1px solid var(--line);border-radius:8px;background:#fff;padding:18mm;color:#111}.receipt-head{display:flex;justify-content:space-between;gap:24px;border-bottom:2px solid var(--accent);padding-bottom:14px;margin-bottom:24px}.receipt-head strong{display:block;font-size:22px;color:var(--primary)}.receipt-head span{display:block;margin-top:4px;color:var(--muted);font-weight:700}.receipt-head div:last-child{text-align:right}.receipt-body{font-size:18px;line-height:1.7;margin:34px 0}.receipt-body span{font-weight:700;color:var(--muted)}.receipt-footer{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:42px;text-align:center}.receipt-footer span,.receipt-footer small{display:block}.receipt-footer small{margin-top:8px;font-weight:700}@media(max-width:720px){.receipt-paper{padding:18px}.receipt-head,.receipt-footer{grid-template-columns:1fr;display:grid;text-align:left}.receipt-head div:last-child{text-align:left}}@media print{body.printing-billing .app-shell,body.printing-billing .main,body.printing-billing #reports-view,body.printing-billing .billing-report-box,body.printing-billing .billing-report-box .table-wrap{display:block!important}body.printing-billing #finance-view{display:none!important}body:has(.receipt-paper) .app-shell{display:none!important}body:has(.receipt-paper) .note-modal{position:static;display:block;padding:0;background:#fff}body:has(.receipt-paper) .note-dialog{width:100%;max-height:none;box-shadow:none;border-radius:0}body:has(.receipt-paper) .note-toolbar{display:none!important}body:has(.receipt-paper) .note-content{padding:0}.receipt-paper{border:0;border-radius:0;width:190mm;min-height:120mm}}
 
 .billing-report-list{display:grid;gap:16px}.client-statement{border:1px solid var(--line);border-radius:8px;background:#fffaf0;padding:14px;page-break-inside:avoid}.statement-head{display:grid;grid-template-columns:1fr 1fr;gap:12px;border-bottom:2px solid var(--primary);padding-bottom:12px;margin-bottom:12px}.statement-head div:last-child{text-align:right}.statement-head span,.statement-head small{display:block;color:var(--muted);font-weight:700}.statement-head strong{display:block;margin:3px 0;color:var(--primary);font-size:22px}.statement-table{width:100%;border-collapse:collapse;background:#fff}.statement-table th,.statement-table td{border:1px solid var(--line);padding:8px;text-align:left}.statement-table th{background:#07172b;color:#fff;font-size:12px;text-transform:uppercase}.statement-table th:nth-child(5),.statement-table td:nth-child(5),.statement-table th:nth-child(6),.statement-table td:nth-child(6){text-align:right}.statement-totals{display:grid;grid-template-columns:repeat(3,minmax(150px,1fr));gap:10px;margin-top:12px}.statement-totals div{border:1px solid var(--line);border-radius:8px;background:#fff;padding:12px}.statement-totals span{display:block;color:var(--muted);font-size:12px;font-weight:700}.statement-totals strong{display:block;margin-top:4px;font-size:18px}.statement-due{background:#07172b!important;color:#fff;border-color:#07172b!important}.statement-due span,.statement-due strong{color:#fff!important}@media(max-width:720px){.statement-head,.statement-totals{grid-template-columns:1fr}.statement-head div:last-child{text-align:left}.statement-table{font-size:12px}}@media print{body.printing-billing .billing-report-list{display:grid!important;gap:10mm}body.printing-billing .client-statement{border:1px solid #111;background:#fff;padding:8mm}body.printing-billing .statement-head{border-bottom-color:#111}body.printing-billing .statement-table th{background:#111!important;color:#fff!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}body.printing-billing .statement-due{background:#111!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}}
@@ -508,3 +508,147 @@ body.previewing-financial-extract .view:not(#finance-view){
 
 /* Extrato de cobrança por período e aviso de saldo devedor */
 .billing-filters{grid-template-columns:repeat(4,minmax(130px,1fr))}.debt-reminder{display:flex;justify-content:space-between;gap:16px;align-items:center;margin:0 0 16px;padding:12px 14px;border:1px solid #e3b8b8;background:#fff1f1;color:#8d2424}.debt-reminder strong,.debt-reminder span{display:block}@media(max-width:900px){.billing-filters{grid-template-columns:repeat(2,minmax(130px,1fr))}}@media(max-width:720px){.billing-filters{grid-template-columns:1fr}.debt-reminder{align-items:flex-start;flex-direction:column}}
+
+/* ===== Cabecalho limpo de documentos (notas, extratos, recibos) =====
+   Consolida as regras antigas, que estavam espalhadas e conflitantes.
+   Fundo branco: imprime melhor e gasta menos tinta. */
+.document-header{
+  display:grid!important;
+  grid-template-columns:auto 1fr auto!important;
+  gap:18px!important;
+  align-items:center!important;
+  min-height:0!important;
+  padding:0 0 14px!important;
+  margin:0 0 18px!important;
+  border:0!important;
+  border-bottom:2px solid var(--primary)!important;
+  border-radius:0!important;
+  background:#fff!important;
+  box-shadow:none!important;
+  overflow:visible!important;
+}
+.document-logo-wrap{display:flex!important;align-items:center!important;justify-content:flex-start!important}
+.labnext-logo{width:auto!important;min-height:0!important;display:block!important;gap:0!important}
+.labnext-logo-symbol{
+  position:static!important;
+  display:grid!important;
+  place-items:center!important;
+  width:54px!important;height:54px!important;
+  border:0!important;border-radius:14px!important;
+  background:var(--primary)!important;
+  box-shadow:none!important;
+}
+.labnext-logo-symbol b{
+  position:static!important;inset:auto!important;
+  display:block!important;
+  border:0!important;background:none!important;
+  color:var(--accent)!important;
+  font-family:var(--display-font);
+  font-size:19px!important;font-weight:800!important;line-height:1!important;
+}
+.labnext-logo-symbol i{display:none!important}
+.document-company{display:grid!important;gap:2px!important;color:var(--ink)!important;min-width:0}
+.document-company strong{font-family:var(--display-font);font-size:20px!important;font-weight:800!important;color:var(--ink)!important;line-height:1.2}
+.document-company span{font-size:11.5px!important;font-weight:400!important;color:var(--muted)!important;line-height:1.4}
+.document-meta{justify-self:end!important;display:grid!important;gap:3px!important;text-align:right!important;color:var(--ink)!important}
+.document-meta strong{font-family:var(--display-font);font-size:17px!important;font-weight:800!important;color:var(--ink)!important}
+.document-meta span{display:block!important;font-size:11.5px!important;font-weight:700!important;color:var(--muted)!important}
+@media(max-width:760px){
+  .document-header{grid-template-columns:auto 1fr!important}
+  .document-meta{grid-column:1 / -1;justify-self:start!important;text-align:left!important}
+}
+@media print{
+  .document-header{border-bottom:2px solid #07172b!important;background:#fff!important;padding:0 0 10px!important;margin-bottom:12px!important}
+  .labnext-logo-symbol{background:#07172b!important}
+}
+
+/* O print-black-white.css deixa o cabecalho em P&B (na tela e no papel).
+   Aqui so damos contorno ao selo para ele ler como marca, nao como texto solto. */
+body .modern-document .document-header .labnext-logo-symbol,
+body .billing-statement-header .document-header .labnext-logo-symbol{
+  border:1.5px solid #111!important;
+  border-radius:12px!important;
+  width:52px!important;height:52px!important;
+  background:#fff!important;
+}
+body .modern-document .document-header .labnext-logo-symbol b,
+body .billing-statement-header .document-header .labnext-logo-symbol b{
+  color:#111!important;font-size:18px!important;letter-spacing:.02em;
+}
+
+.entries-filters{display:flex;flex-wrap:wrap;gap:10px;align-items:end;margin-bottom:14px}
+.entries-filters label{display:grid;gap:5px;flex:1 1 140px;min-width:0;color:var(--muted);font-size:11.5px;font-weight:700}
+.entries-filters select,.entries-filters input{height:38px}
+.entries-filters button{flex:0 0 auto;height:38px;min-height:38px}
+.expected-date-hint{display:block;margin-top:2px;color:var(--muted);font-size:11.5px;line-height:1.35}
+.expected-date-warning{color:var(--danger);font-weight:700}
+@media(max-width:720px){.entries-filters label{flex:1 1 100%}}
+
+/* ===== Janela de cadastro de entrada (nota de servico) ===== */
+.view-toolbar{display:flex;align-items:center;gap:14px;margin-bottom:16px}
+.view-toolbar>span{color:var(--muted);font-size:13px}
+.primary-action{min-height:44px;padding:0 20px;border-radius:12px;background:var(--primary);color:#fff;font-size:14px;font-weight:700;box-shadow:0 8px 20px rgba(7,23,43,.18)}
+.primary-action:hover{background:var(--primary-dark)}
+.services-stack{display:grid;gap:18px;min-width:0}
+
+.entry-modal{position:fixed;inset:0;z-index:30;display:grid;place-items:center;padding:24px;background:rgba(7,23,43,.72)}
+.entry-modal[hidden]{display:none!important}
+.entry-dialog{width:min(1180px,100%);max-height:92vh;display:flex;flex-direction:column;border-radius:16px;background:#fff;box-shadow:0 24px 70px rgba(0,0,0,.32);overflow:hidden}
+.entry-modal-header{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:18px 24px;border-bottom:1px solid var(--line);background:#fff}
+.entry-modal-header h2{margin:0;font-size:19px}
+.entry-modal-body{overflow:auto;padding:0}
+
+/* formulario em grade larga, no lugar da coluna estreita */
+.entry-modal .entry-form{
+  display:grid;
+  grid-template-columns:repeat(12,minmax(0,1fr));
+  gap:16px;
+  padding:22px 24px 24px;
+  border:0;border-radius:0;box-shadow:none;background:#fff;
+}
+.entry-modal .entry-form>label{display:grid;gap:6px;min-width:0;margin:0}
+.entry-modal .entry-form>label:nth-of-type(1){grid-column:span 4}  /* Dentista */
+.entry-modal .entry-form>label:nth-of-type(2){grid-column:span 4}  /* Paciente */
+.entry-modal .entry-form>label:nth-of-type(3){grid-column:span 2}  /* Data de entrada */
+.entry-modal .entry-form>label:nth-of-type(4){grid-column:span 2}  /* Prazo em dias */
+.entry-modal .entry-form>label:nth-of-type(5){grid-column:span 3}  /* Data prevista */
+.entry-modal .entry-form>label{grid-column:span 3}
+.entry-modal .entry-form>label:nth-of-type(1){grid-column:span 4}
+.entry-modal .entry-form>label:nth-of-type(2){grid-column:span 4}
+.entry-modal .entry-form>label:nth-of-type(3){grid-column:span 2}
+.entry-modal .entry-form>label:nth-of-type(4){grid-column:span 2}
+.entry-modal .entry-form>.entry-items-box{grid-column:1 / -1;margin:4px 0}
+.entry-modal .entry-form>label:has(textarea){grid-column:1 / -1}
+.entry-modal .entry-form>.form-actions{grid-column:1 / -1;justify-content:flex-end;padding-top:6px;border-top:1px solid var(--line);margin-top:4px}
+.entry-modal .entry-form .proof-date-field{grid-column:span 3}
+.entry-modal .entry-form .form-actions button[type=submit]{min-height:44px;padding:0 24px}
+
+@media(max-width:900px){
+  .entry-modal{padding:12px}
+  .entry-modal .entry-form{grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;padding:16px}
+  .entry-modal .entry-form>label,
+  .entry-modal .entry-form>label:nth-of-type(1),
+  .entry-modal .entry-form>label:nth-of-type(2),
+  .entry-modal .entry-form>label:nth-of-type(3),
+  .entry-modal .entry-form>label:nth-of-type(4){grid-column:span 2}
+}
+
+/* Itens da nota em linha unica dentro da janela larga */
+.entry-modal .entry-items-box{border:1px solid var(--line);border-radius:12px;background:#fbfcfe;padding:14px 16px}
+.entry-modal .entry-items-head{
+  display:grid!important;
+  grid-template-columns:minmax(0,3fr) 80px 110px 100px 100px 120px 92px;
+  gap:8px;padding:0 10px 8px;
+  color:var(--muted);font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.03em;
+}
+.entry-modal .entry-item-row{
+  grid-template-columns:minmax(0,3fr) 80px 110px 100px 100px 120px 92px!important;
+  align-items:center;
+}
+.entry-modal .entry-item-row input[name="itemService"]{grid-column:auto!important}
+.entry-modal .entry-item-row button{width:100%;min-width:0;padding:0 8px}
+@media(max-width:1000px){
+  .entry-modal .entry-items-head{display:none!important}
+  .entry-modal .entry-item-row{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .entry-modal .entry-item-row input[name="itemService"]{grid-column:1/-1!important}
+}
