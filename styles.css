@@ -652,3 +652,19 @@ body .billing-statement-header .document-header .labnext-logo-symbol b{
   .entry-modal .entry-item-row{grid-template-columns:repeat(2,minmax(0,1fr))!important}
   .entry-modal .entry-item-row input[name="itemService"]{grid-column:1/-1!important}
 }
+
+/* Abas do relatorio de entradas */
+.report-head-actions{display:flex;gap:8px;flex-wrap:wrap}
+.report-tabs{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 14px;padding:6px;border:1px solid var(--line);border-radius:12px;background:#f6f8fb}
+.report-tab{min-height:36px;padding:0 16px;border:1px solid transparent;border-radius:9px;background:transparent;color:var(--muted);font-size:13px;font-weight:700}
+.report-tab:hover{background:#fff;color:var(--ink)}
+.report-tab.active{background:#fff;border-color:var(--line);color:var(--primary);box-shadow:0 1px 2px rgba(15,23,42,.06)}
+.report-tab-panel{display:none}
+.report-tab-panel.active{display:block}
+@media print{.report-tabs{display:none!important}.report-tab-panel{display:block!important}}
+
+/* Nota aparece por cima da janela de cadastro; o formulario nunca vai para o papel */
+.note-modal{z-index:40}
+.entry-modal-actions{display:flex;gap:8px;flex-wrap:wrap}
+.entry-modal-actions button[disabled]{opacity:.45;cursor:not-allowed}
+@media print{.entry-modal{display:none!important}}
