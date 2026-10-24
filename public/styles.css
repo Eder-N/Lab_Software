@@ -677,3 +677,7 @@ body .billing-statement-header .document-header .labnext-logo-symbol b{
 .services-pane{display:none}
 .services-pane.active{display:grid;gap:18px}
 @media print{.services-tabs,.view-toolbar{display:none!important}.services-pane{display:grid!important}}
+
+/* Credito a favor do cliente no extrato */
+.statement-credit{border-color:#bfe3c9!important;background:#eafaef!important;color:#1f8a5f!important}
+.financial-summary .statement-credit{border:0!important;background:none!important;color:#1f8a5f!important;font-weight:800}
